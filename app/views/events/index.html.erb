@@ -1,0 +1,11 @@
+<h3>All events</h3>
+
+<h4>Goto <%= link_to "My Events", events_my_events_path %></h4>
+
+<h4><%= link_to "Add a new event", new_event_path %></h4>
+
+<ul>
+	<% @events.each do |event| %>
+		<li><%= event.name %> - <%= event.user.email %> - <%= link_to "Show", event_path(event) %> - <%= link_to "Edit", edit_event_path(event) %> - <%= link_to "Delete", event_path(event), method: :delete, data: {confirm: "Are you sure?"} %></li>
+	<% end %>
+</ul>

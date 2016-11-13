@@ -1,0 +1,7 @@
+<h3>My Events</h3>
+
+<ul>
+	<% @events.each do |event| %>
+		<li><%= event.name %> - <%= event.user.email %> - <%= link_to "Show", event_path(event) %> - <%= link_to "Edit", edit_event_path(event) %> - <%= link_to "Delete", event_path(event), method: :delete, data: {confirm: "Are you sure?"} %></li>
+	<% end %>
+</ul>

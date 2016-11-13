@@ -1,0 +1,9 @@
+<h3>Details of <%= @event.name %></h3>
+
+<h4>Event is <%= @event.status %></h4>
+<p>
+	Description : <%= @event.description %> <br/>
+	Starting from : <%= @event.start_datetime.strftime("%d %B %Y - %I:%M %P ") %> <br/>
+	Ending at : <%= @event.end_datetime.strftime("%d %B %Y - %I:%M %P ") %> <br/>
+	Entry fee : <%= @event.entry_fee %> <br/>
+</p>

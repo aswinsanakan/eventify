@@ -1,0 +1,39 @@
+<h3>Add a new Event</h3>
+
+
+<%= form_for @event do |f| %>
+	
+	<% if @event.errors.any? %>
+		<div class="errors" style="color : red;">
+			<h3>These errors prohibited the form from being created:</h3>
+			<ul>
+				<% @event.errors.full_messages.each do |msg| %>
+				<li><%= msg%></li>
+				<% end %>
+			</ul>			
+		</div>	
+	<% end %>
+	
+	<%= f.label :name %>
+	<%= f.text_field :name %> <br/>
+
+	<%= f.label :description %>
+	<%= f.text_area :description %> <br/>
+
+	<%= f.label :start_datetime %>
+	<%= f.date_field :start_datetime, value: Date.today %> 
+	<%= f.time_field :start_datetime, ignore_date: true %> <br/>
+
+	<%= f.label :end_datetime %>
+	<%= f.date_field :end_datetime, value: Date.today %> 
+	<%= f.time_field :end_datetime, ignore_date: true %> <br/>
+
+	<%= f.label :entry_fee %>
+	<%= f.number_field :entry_fee %> <br/>
+
+	<%= f.label :status %>
+	<%= f.select :status, ["New", "On-going", "Over"] %> <br/>
+
+	<%= f.submit "Add Event" %>
+
+<% end %>

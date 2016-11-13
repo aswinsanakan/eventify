@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  venue_id: 1
+  city_id: 1
+  start_datetime: 2016-11-08 17:49:38
+  end_datetime: 2016-11-08 17:49:38
+  entry_fee: 1.5
+  status: MyString
+  locality_id: 1
+
+two:
+  name: MyString
+  description: MyText
+  venue_id: 1
+  city_id: 1
+  start_datetime: 2016-11-08 17:49:38
+  end_datetime: 2016-11-08 17:49:38
+  entry_fee: 1.5
+  status: MyString
+  locality_id: 1
