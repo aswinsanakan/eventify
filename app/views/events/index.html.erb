@@ -1,6 +1,10 @@
 <h4>Goto <%= link_to "My Events", events_my_events_path %></h4>
 
-<h4><%= link_to "Add a new event", new_event_path %></h4>
+<h4>
+	<% if can? :create, Event.new %>
+	<%= link_to "Add a new event", new_event_path %>
+	<% end %>
+</h4>
 
 <%= form_tag(events_path, method: "get") do %>
 	<%= text_field_tag :search, params[:search], prompt: "Enter a keyword..." %>
@@ -28,7 +32,7 @@
 		<td><%= event.user.email %></td>
 		<td style="text-align:left">
 			<%= link_to "Show", event_path(event) %>
-			<% if event.user_id == current_user.id %>
+			<% if can? :update, event %>
 				- <%= link_to "Edit", edit_event_path(event) %> - <%= link_to "Delete", event_path(event), method: :delete, data: {confirm: "Are you sure you wanna delete #{event.name} ?"} %>
 			<% end %>		
 		</td>

@@ -8,6 +8,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  after_create :assign_user_role
   
+  def role?(role)
+  	self.roles.pluck(:name).include? role
+  end
+
+  private
+
+  def assign_user_role
+  	permission.create(user_id: self.id, role_id: Role.last.id)
+  end
 
 end

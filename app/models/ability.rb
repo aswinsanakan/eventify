@@ -12,11 +12,13 @@ class Ability
         can :manage, Event do |event|
             event.try(:user) == user
         end
+        can :read, Event
         can :read, Venue
     elsif user.role? "venue_owner"
         can :manage, Venue do |venue|
             venue.try(:user) == user
         end
+        can :read, Venue
         can :read, Event
 
     elsif user.role? "user"
