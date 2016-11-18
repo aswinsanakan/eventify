@@ -5,5 +5,7 @@
 	Description : <%= @event.description %> <br/>
 	Starting from : <%= @event.start_datetime.strftime("%d %B %Y - %I:%M %P ") %> <br/>
 	Ending at : <%= @event.end_datetime.strftime("%d %B %Y - %I:%M %P ") %> <br/>
-	Entry fee : <%= @event.entry_fee %> <br/>
+	Entry fee : Rs.<%= @event.entry_fee %> <br/>
 </p>
+
+<p>Go <%= link_to "Back", events_path %></p>

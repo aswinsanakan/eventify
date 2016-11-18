@@ -1,11 +1,37 @@
-<h3>All events</h3>
-
 <h4>Goto <%= link_to "My Events", events_my_events_path %></h4>
 
 <h4><%= link_to "Add a new event", new_event_path %></h4>
 
+<%= form_tag(events_path, method: "get") do %>
+	<%= text_field_tag :search, params[:search], prompt: "Enter a keyword..." %>
+	<%= submit_tag "Search" %>
+<% end %>
+
+
+
 <ul>
-	<% @events.each do |event| %>
-		<li><%= event.name %> - <%= event.user.email %> - <%= link_to "Show", event_path(event) %> - <%= link_to "Edit", edit_event_path(event) %> - <%= link_to "Delete", event_path(event), method: :delete, data: {confirm: "Are you sure?"} %></li>
+	<% if params[:search] == nil %>
+		<h3>All Events</h3>
+	<% else %>
+		<h3>Events with "<%= params[:search] %>" : </h3>
 	<% end %>
 </ul>
+
+<table border="0", width=75% >
+	<tr>
+		<th>Event</th>
+		<th>Organiser</th>
+	</tr>
+	<% @events.each do |event| %>
+	<tr style="text-align:center">
+		<td><%= link_to "#{event.name}", event_path(event) %></td>
+		<td><%= event.user.email %></td>
+		<td style="text-align:left">
+			<%= link_to "Show", event_path(event) %>
+			<% if event.user_id == current_user.id %>
+				- <%= link_to "Edit", edit_event_path(event) %> - <%= link_to "Delete", event_path(event), method: :delete, data: {confirm: "Are you sure you wanna delete #{event.name} ?"} %>
+			<% end %>		
+		</td>
+	</tr>
+	<% end %>
+</table>

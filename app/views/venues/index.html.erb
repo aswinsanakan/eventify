@@ -1,0 +1,7 @@
+<h3>All venues</h3>
+
+<ol>
+	<% @venues.each do |venue| %>
+		<li><%= link_to "#{venue.name}", venue_name(venue) %></li>
+	<% end %>
+</ol>
