@@ -20,6 +20,7 @@ class EventsController < ApplicationController
 		@event = Event.new(event_params)
 		@event.user_id = current_user.id
 		if @event.save
+			@venue_booking = VenueBooking.create(start_datetime: @event.start_datetime, end_datetime: @event.end_datetime, venue_id: @event.venue_id, event_id: @event.id)
 			redirect_to events_path, notice: "Successfully added!"
 		else
 			render action: "new"

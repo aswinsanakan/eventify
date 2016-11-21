@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
 	has_many :events
+  has_many :venues
 	has_many :permissions
 	has_many :roles, through: :permissions
   # Include default devise modules. Others available are:
@@ -17,7 +18,7 @@ class User < ActiveRecord::Base
   private
 
   def assign_user_role
-  	permission.create(user_id: self.id, role_id: Role.last.id)
+  	Permission.create(user_id: self.id, role_id: Role.last.id)
   end
 
 end

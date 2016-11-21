@@ -6,4 +6,5 @@ task :clear_data => :environment do
 	Locality.delete_all
 	Venue.delete_all
 	Event.delete_all
+	VenueBooking.delete_all
 end

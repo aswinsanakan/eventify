@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_datetime: 2016-11-19 18:41:38
+  end_datetime: 2016-11-19 18:41:38
+  venue_id: 1
+
+two:
+  start_datetime: 2016-11-19 18:41:38
+  end_datetime: 2016-11-19 18:41:38
+  venue_id: 1

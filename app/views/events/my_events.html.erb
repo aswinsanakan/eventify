@@ -1,9 +1,27 @@
-<h3>My Events</h3>
+<div class="container">
+	<div class="page-header">
+		<h3>My Events</h3>
+	</div>
 
-<ul>
-	<% @events.each do |event| %>
-		<li><%= event.name %> - <%= event.user.email %> - <%= link_to "Show", event_path(event) %> - <%= link_to "Edit", edit_event_path(event) %> - <%= link_to "Delete", event_path(event), method: :delete, data: {confirm: "Are you sure?"} %></li>
-	<% end %>
-</ul>
+	<table class="table table-striped" >
+		<tr >
+			<th>Event</th>
+			<th>Organiser</th>
+			<th>Action</th>
+		</tr>
+		<% @events.each do |event| %>
+		<tr >
+			<td><%= link_to "#{event.name}", event_path(event) %></td>
+			<td><%= event.user.email %></td>
+			<td >
+				<%= link_to "Show", event_path(event) %>
+				<% if can? :update, event %>
+					- <%= link_to "Edit", edit_event_path(event) %> - <%= link_to "Delete", event_path(event), method: :delete, data: {confirm: "Are you sure you wanna delete #{event.name} ?"} %>
+				<% end %>		
+			</td>
+		</tr>
+		<% end %>
+	</table>
 
-<p>Go <%= link_to "Back", events_path %></p>
+	<p>Go <%= link_to "Back", events_path %></p>
+</div>

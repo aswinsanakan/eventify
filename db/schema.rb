@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118142230) do
+ActiveRecord::Schema.define(version: 20161119140749) do
 
   create_table "cities", force: :cascade do |t|
     t.string   "name"
@@ -71,13 +71,22 @@ ActiveRecord::Schema.define(version: 20161118142230) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
+  create_table "venue_bookings", force: :cascade do |t|
+    t.datetime "start_datetime"
+    t.datetime "end_datetime"
+    t.integer  "venue_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "event_id"
+  end
+
   create_table "venues", force: :cascade do |t|
     t.string   "name"
-    t.integer  "city_id"
     t.text     "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "user_id"
+    t.integer  "locality_id"
   end
 
 end

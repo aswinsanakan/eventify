@@ -6,24 +6,32 @@ class Ability
     if user.nil?
         can :read, Event
         can :read, Venue
+        
     elsif user.role? "admin"
         can :manage, :all 
     elsif user.role? "organizer"
-        can :manage, Event do |event|
+        can [:update, :destroy], Event do |event|
             event.try(:user) == user
         end
-        can :read, Event
+        can [:my_events], Event
+        can [:create, :read], Event
         can :read, Venue
+        can :read, VenueBooking
     elsif user.role? "venue_owner"
-        can :manage, Venue do |venue|
+        can [:update, :destroy], Venue do |venue|
             venue.try(:user) == user
         end
-        can :read, Venue
+        can [:create, :read], Venue
+        can [:update, :destroy], VenueBooking do |booking|
+            booking.try(:user) == user
+        end
         can :read, Event
+        can [:create, :read], VenueBooking 
 
     elsif user.role? "user"
         can :read, Event
         can :read, Venue
+        can :read, VenueBooking
     end
     # Define abilities for the passed in user here. For example:
     #

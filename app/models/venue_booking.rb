@@ -1,23 +1,10 @@
-require 'pry'
-
-class Event < ActiveRecord::Base
-	has_many :venue_bookings
-	belongs_to :city
+class VenueBooking < ActiveRecord::Base
 	belongs_to :venue
-	belongs_to :locality
-
-	belongs_to :user
+	belongs_to :event
 
 	validate :slot_open?
 
-	#validates_presence_of :name
-
-	def self.search(search)
-		where("name LIKE ?", "#{search}")
-		#where("description LIKE ?", "%#{search}%")
-	end
-
-	private 
+	private
 
 	def slot_open?
 		bookings = self.venue.venue_bookings

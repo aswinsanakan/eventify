@@ -1,7 +1,27 @@
-<h3>All venues</h3>
+<div class="container" >
+	<h3>All venues</h3>
 
-<ol>
-	<% @venues.each do |venue| %>
-		<li><%= link_to "#{venue.name}", venue_path(venue) %></li>
+	<% if can? :create, Venue.new %>
+		<%= link_to "Add a venue", new_venue_path, class: "btn btn-info" %> <br>
 	<% end %>
-</ol>
+	<br>
+
+	<table class="table table-striped">
+		<tr>
+			<th>Venue</th>
+			<th>Owner</th>
+			<th>Action</th>
+		</tr>
+		<% @venues.each do |venue| %>
+		<tr>
+			<td><%= link_to "#{venue.name}", venue_path(venue) %></td>
+			<td><%= venue.user.email %></td>
+			<td><%= link_to "Show", venue_path(venue) %>
+				<% if can? :update, venue %>
+					- <%= link_to "Edit", edit_venue_path(venue) %> - <%= link_to "Delete", venue_path(venue), method: :delete, data: {confirm: "Are you sure you wanna delete #{venue.name} ?"} %>
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+</div>

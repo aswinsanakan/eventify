@@ -1,0 +1,51 @@
+<div class="container">
+
+<div class="page-header"><h3><%= @venue.name.capitalize %></h3></div>
+<p>Owned by : <%= @venue.user.email %></p>
+<p>Address : <%= @venue.address %></p>
+
+<br>
+
+
+<% if can? :update, @venue %>
+	<h4>Add a Booking</h4>
+
+	<%= form_for @venue_booking do |f| %>
+		
+		<%= f.hidden_field :venue_id, value: @venue.id %>
+
+		<%= f.label "Starting at" %>
+	<%= f.datetime_select :start_datetime, ampm: true, minute_step: 15 %> <br>
+
+	<%= f.label "Ending at" %>
+	<%= f.datetime_select :end_datetime, ampm: true, minute_step: 15 %> <br/>
+			
+		<%= f.submit "Book", class: "btn btn-primary"%>
+
+	<% end %>
+
+<% end %>
+
+<br>
+<h4>Bookings</h4>
+<table class="table table-bordered", >
+	<tr>
+		<th>#</th>
+		<th>Starts on</th>
+		<th>Ends at</th>
+	</tr>
+	<% @venue.venue_bookings.each_with_index do |booking, i| %>
+	<tr>
+		<td>
+			<%= i +=1 %>		
+		</td>
+		<td><%= booking.start_datetime.strftime("%d %B %Y - %I:%M %P ") %></td>
+		<td><%= booking.end_datetime.strftime("%d %B %Y - %I:%M %P ") %></td>
+	</tr>
+	<% end %>
+</table>
+
+
+<%= link_to "Back", venues_path %>
+
+</div>

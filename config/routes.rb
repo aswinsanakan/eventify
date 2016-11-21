@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+
   resources :venues
+
+  resources :venue_bookings
 
   get 'events/my_events'
   resources :events
