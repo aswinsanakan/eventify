@@ -1,4 +1,4 @@
-<div class="container">
+
 <div class="page-header">
 <h2><%= @event.name.capitalize %> <small><%= @event.status.capitalize %></small> </h2>
 </div>
@@ -8,9 +8,15 @@
 	<b>Venue : </b> <%= link_to "#{@event.venue.name}", venue_path(@event.venue) %> <br>
 	<b>Starting from :</b> <%= @event.start_datetime.strftime("%d %B %Y - %I:%M %P ") %> <br/>
 	<b>Ending at :</b> <%= @event.end_datetime.strftime("%d %B %Y - %I:%M %P ") %> <br/>
-	<b>Entry fee :</b> Rs.<%= @event.entry_fee %> <br/>
 </p>
+
+<div>
+	<h3>Buy Tickets</h3>
+	<b>Entry fee :</b> Rs.<%= @event.entry_fee %> <br/>
+	<%= form_for @event_booking do |f|  %>
+		<%= f.select  %>
+	<% end %>
+</div>
 
 
 <p>Go <%= link_to "Back", events_path %></p>
-</div>

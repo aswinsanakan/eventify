@@ -1,0 +1,17 @@
+<h3>Add user</h3>
+
+<%= form_for @user do |f| %>
+
+	<%= f.label :email %> <br>
+	<%= f.email_field :email %> <br>
+
+	<%= f.label :password %> <br>
+	<%= f.text_field :password %> <br>
+
+	<%= f.label :roles %> <br>
+	<%= f.collection_check_boxes :role_ids, Role.all, :id, :name %> <br>
+
+	<%= f.submit %> <br>
+<% end %>
+
+<%= link_to "back", users_path %>

@@ -1,0 +1,22 @@
+<h3>Listing users</h3>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Email</th>
+			<th>Role</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+		<tr>
+			<td><%= user.email %></td>
+			<td><%= user.roles.pluck(:name).join(", ") %></td>
+			<td><%= link_to "edit", edit_user_path(user) %> - <%= link_to "delete", user_path(user), method: :delete, data: {confirm: "Are you sure?"} %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<%= link_to "Add user", new_user_path %>
