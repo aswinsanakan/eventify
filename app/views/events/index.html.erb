@@ -24,6 +24,20 @@
 <% end %>
 <br>
 
+<ul class="nav nav-tabs">
+	<li role="presentation" class="active"> <a href="/events">Home</a></li>
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      Categories <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <% @categories.each do |category| %>
+      	<li><%= link_to category.name.capitalize, category_path(category) %></li>
+      <% end %>
+    </ul>
+  </li>
+</ul>
+
 <table class="table table-striped" >
 	<tr >
 		<th>Event</th>
@@ -33,7 +47,7 @@
 	<% @events.each do |event| %>
 	<tr >
 		<td><%= link_to "#{event.name.capitalize}", event_path(event) %></td>
-		<td><%= event.user.email %></td>
+		<td><%= event.user.username %></td>
 		<td >
 			<%= link_to "Show", event_path(event) %>
 			<% if can? :update, event %>

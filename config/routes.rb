@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  resources :event_bookings
+  devise_for :users, controllers: {registrations: 'registrations'}
 
   scope "/admin" do 
     resources :users
@@ -12,7 +13,10 @@ Rails.application.routes.draw do
   resources :venue_bookings
 
   get 'events/my_events'
-  resources :events
+  resources :events do 
+    resources :event_bookings
+  end
+  resources :categories
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

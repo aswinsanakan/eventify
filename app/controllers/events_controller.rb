@@ -5,6 +5,7 @@ class EventsController < ApplicationController
 
 	def index
 		@events = Event.all
+		@categories = Category.all
 		if params[:search]
 			@events = Event.search(params[:search])
 		else
@@ -14,11 +15,14 @@ class EventsController < ApplicationController
 
 	def new
 		@event = Event.new
+		
 	end
 
 	def create
 		@event = Event.new(event_params)
+		@event.locality_id = @event.venue.locality_id
 		@event.user_id = current_user.id
+
 		if @event.save
 			@venue_booking = VenueBooking.create(start_datetime: @event.start_datetime, end_datetime: @event.end_datetime, venue_id: @event.venue_id, event_id: @event.id)
 			redirect_to events_path, notice: "Successfully added!"
@@ -29,6 +33,12 @@ class EventsController < ApplicationController
 
 	def show
 		@event = Event.find(params[:id])
+		@event_booking = EventBooking.new
+		@event_bookings = @event.event_bookings
+
+		if params[:booking_id]
+			@booking_confirmed = EventBooking.find(params[:booking_id])
+		end
 	end
 
 	def edit
@@ -57,6 +67,6 @@ class EventsController < ApplicationController
 	private
 
 	def event_params
-		params[:event].permit(:name, :description, :venue_id, :city_id, :start_datetime, :end_datetime, :entry_fee, :status, :locality_id)
+		params[:event].permit(:name, :description, :venue_id, :city_id, :start_datetime, :end_datetime, :entry_fee, :status, :locality_id, :tickets_left, category_ids: [])
 	end
 end

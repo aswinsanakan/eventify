@@ -1,22 +1,87 @@
 
 <div class="page-header">
-<h2><%= @event.name.capitalize %> <small><%= @event.status.capitalize %></small> </h2>
+<h2><%= @event.name.capitalize %><sup> <small> <em> <%= @event.status %></em></small></sup></h2>
 </div>
 <h5>Event is <b><%= @event.status.upcase %></b></h5>
 <p>
 	<b>Description :</b> <%= @event.description %> <br/>
-	<b>Venue : </b> <%= link_to "#{@event.venue.name}", venue_path(@event.venue) %> <br>
+	<b>Venue : </b> <%= link_to "#{@event.venue.name.capitalize}", venue_path(@event.venue) %> <br>
 	<b>Starting from :</b> <%= @event.start_datetime.strftime("%d %B %Y - %I:%M %P ") %> <br/>
 	<b>Ending at :</b> <%= @event.end_datetime.strftime("%d %B %Y - %I:%M %P ") %> <br/>
 </p>
 
+<% if can? :create, @event_booking %>
 <div>
+	
 	<h3>Buy Tickets</h3>
 	<b>Entry fee :</b> Rs.<%= @event.entry_fee %> <br/>
-	<%= form_for @event_booking do |f|  %>
-		<%= f.select  %>
-	<% end %>
+	<%= form_for([@event,@event_booking]) do |f|  %>
+		
+		<% @event_booking.tickets = 0 %>
+		<%= f.label "Choose no of tickets" %>
+		<%= f.select :tickets, [1,2,3,4,5,6,7,8,9,10] %> 
+	
+		<% @event_booking.total_price = @event.entry_fee * @event_booking.tickets %>
+	 
+		<%= f.submit "Book" %> <br>
+		
+	<% end %>	
+	<% if params[:booking_id] %>
+		<h3>Booked successfully! Total Price : <%= @booking_confirmed.total_price %></h3> <br>
+	<%end %>
 </div>
+<% end %>
+
+<div>
+	
+	<h3>
+		Tickets Left:
+		<%= @event.tickets_left %>
+	</h3>
+</div>
+
+
+<% if can? :update, @event.event_bookings.first %>
+<h3>Bookings</h3>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>User</th>
+			<th>Email</th>
+			<th>Tickets Booked</th>
+			<th>Price</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% 	i = 1
+			sum = 0
+			tickets = 0 %>
+		<% @event_bookings.each do |booking| %>
+		<tr>
+			<td><%= i %></td>
+			<td><%= booking.user.username %></td>
+			<td><%= booking.user.email %></td>
+			<td><%= booking.tickets %></td>
+			<td>Rs. <%= booking.total_price %></td>
+			<% 	i += 1
+				sum += booking.total_price 
+				tickets += booking.tickets %>
+		</tr>
+		<%end %>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>Total Tickets : <b><%= tickets %></b></td>
+			<td><b>Rs. <%= sum %></b></td>
+		</tr>
+	</tbody>
+</table>
+<% end %>
+
+
 
 
 <p>Go <%= link_to "Back", events_path %></p>

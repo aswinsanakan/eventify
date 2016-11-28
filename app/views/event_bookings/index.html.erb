@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Event Bookings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_bookings.each do |event_booking| %>
+      <tr>
+        <td><%= event_booking.event_id %></td>
+        <td><%= event_booking.user_id %></td>
+        <td><%= link_to 'Show', event_booking %></td>
+        <td><%= link_to 'Edit', edit_event_booking_path(event_booking) %></td>
+        <td><%= link_to 'Destroy', event_booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event booking', new_event_booking_path %>

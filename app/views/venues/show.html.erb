@@ -1,9 +1,9 @@
 
 
 <div class="page-header"><h3><%= @venue.name.capitalize %></h3></div>
-<p>Owned by : <%= @venue.user.email %></p>
+<p>Owned by : <%= @venue.user.username %></p>
 <p>Address : <%= @venue.address %></p>
-
+<p>Seat Capacity : <b><%= @venue.seats %></b></p>
 <br>
 
 
@@ -27,10 +27,13 @@
 <% end %>
 
 <br>
+
+
 <h4>Bookings</h4>
 <table class="table table-bordered", >
 	<tr>
 		<th>#</th>
+		<th>Event</th>
 		<th>Starts on</th>
 		<th>Ends at</th>
 	</tr>
@@ -38,6 +41,13 @@
 	<tr>
 		<td>
 			<%= i +=1 %>		
+		</td>
+		<td>
+			<% if !booking.event.nil? %>
+				<%= booking.event.name.capitalize %>
+			<% else %>
+				<p>*Booked by VenueOwner*</p>
+			<%end%>
 		</td>
 		<td><%= booking.start_datetime.strftime("%d %B %Y - %I:%M %P ") %></td>
 		<td><%= booking.end_datetime.strftime("%d %B %Y - %I:%M %P ") %></td>

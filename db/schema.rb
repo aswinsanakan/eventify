@@ -11,12 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119140749) do
+ActiveRecord::Schema.define(version: 20161128203515) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "cities", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "event_bookings", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.float    "total_price"
+    t.integer  "tickets"
+  end
+
+  create_table "event_categories", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -31,6 +53,7 @@ ActiveRecord::Schema.define(version: 20161119140749) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "user_id"
+    t.integer  "tickets_left"
   end
 
   create_table "localities", force: :cascade do |t|
@@ -66,6 +89,7 @@ ActiveRecord::Schema.define(version: 20161119140749) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
@@ -87,6 +111,7 @@ ActiveRecord::Schema.define(version: 20161119140749) do
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.integer  "locality_id"
+    t.integer  "seats"
   end
 
 end

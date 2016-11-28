@@ -1,14 +1,17 @@
-require 'pry'
 
 class Event < ActiveRecord::Base
 	has_many :venue_bookings
+	has_many :event_bookings
+	has_many :event_categories
+	has_many :categories, through: :event_categories
+
+
 	belongs_to :city
 	belongs_to :venue
 	belongs_to :locality
-
 	belongs_to :user
 
-	validate :slot_open?
+	validate :slot_open?, on: :create
 
 	#validates_presence_of :name
 

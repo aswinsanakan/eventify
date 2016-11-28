@@ -23,6 +23,8 @@
 
 	<%= f.label :locality_id %>
 	<%= f.collection_select :locality_id, Locality.all, :id, :name, prompt: "Select your locality" %> <br>
+	<%= f.label "Seats(if any)" %>
+	<%= f.number_field :seats %> <br>
 
 	<%= f.submit "Add Venue" %>
 </div>

@@ -2,7 +2,7 @@ class VenueBooking < ActiveRecord::Base
 	belongs_to :venue
 	belongs_to :event
 
-	validate :slot_open?
+	validate :slot_open?, on: :create
 
 	private
 
