@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161128203515) do
+ActiveRecord::Schema.define(version: 20161129125933) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20161128203515) do
     t.datetime "updated_at",     null: false
     t.integer  "user_id"
     t.integer  "tickets_left"
+    t.string   "avatar"
   end
 
   create_table "localities", force: :cascade do |t|

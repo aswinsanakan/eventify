@@ -1,5 +1,8 @@
 
 class Event < ActiveRecord::Base
+
+	mount_uploader :avatar, AvatarUploader
+
 	has_many :venue_bookings
 	has_many :event_bookings
 	has_many :event_categories

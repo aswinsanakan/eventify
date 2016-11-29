@@ -4,8 +4,9 @@
 </div>
 <h5>Event is <b><%= @event.status.upcase %></b></h5>
 <p>
+	<%= image_tag(@event.avatar.url, height: "250px") if @event.avatar %> <br>
 	<b>Description :</b> <%= @event.description %> <br/>
-	<b>Venue : </b> <%= link_to "#{@event.venue.name.capitalize}", venue_path(@event.venue) %> <br>
+	<b>Venue : </b> <%= link_to "#{@event.venue.name}", venue_path(@event.venue) %> <br>
 	<b>Starting from :</b> <%= @event.start_datetime.strftime("%d %B %Y - %I:%M %P ") %> <br/>
 	<b>Ending at :</b> <%= @event.end_datetime.strftime("%d %B %Y - %I:%M %P ") %> <br/>
 </p>

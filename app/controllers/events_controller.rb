@@ -67,6 +67,6 @@ class EventsController < ApplicationController
 	private
 
 	def event_params
-		params[:event].permit(:name, :description, :venue_id, :city_id, :start_datetime, :end_datetime, :entry_fee, :status, :locality_id, :tickets_left, category_ids: [])
+		params[:event].permit(:name, :description, :venue_id, :city_id, :start_datetime, :end_datetime, :entry_fee, :status, :locality_id, :tickets_left, :avatar, category_ids: [])
 	end
 end
