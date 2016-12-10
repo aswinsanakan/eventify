@@ -10,19 +10,27 @@
 	<tr>
 		<th>Venue</th>
 		<th>Owner</th>
-		<th>Action</th>
 		<th>Seats</th>
+		<th>Action</th>
 	</tr>
 	<% @venues.each do |venue| %>
 	<tr>
 		<td><%= link_to "#{venue.name}", venue_path(venue) %></td>
 		<td><%= venue.user.username %></td>
-		<td><%= link_to "Show", venue_path(venue) %>
+		<td><%= venue.seats %></td>
+		<td>
+			<%= link_to venue_path(venue) do%>
+				<span class="glyphicon glyphicon-eye-open"></span>
+			<%end%>
 			<% if can? :update, venue %>
-				- <%= link_to "Edit", edit_venue_path(venue) %> - <%= link_to "Delete", venue_path(venue), method: :delete, data: {confirm: "Are you sure you wanna delete #{venue.name} ?"} %>
+				<%= link_to edit_venue_path(venue) do %>
+					<span class="glyphicon glyphicon-pencil"></span>
+				<%end%>
+				<%= link_to venue_path(venue), method: :delete, data: {confirm: "Are you sure?"} do %>
+					<span class="glyphicon glyphicon-trash"></span>
+				<%end%>
 			<% end %>
 		</td>
-		<td><%= venue.seats %></td>
 	</tr>
 	<% end %>
 </table>

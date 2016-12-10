@@ -1,6 +1,11 @@
 
+
 <div class="page-header">
-<h2><%= @event.name.capitalize %><sup> <small> <em> <%= @event.status %></em></small></sup></h2>
+<ol class="breadcrumb">
+	<li><%= link_to "Events", events_path %></li>
+	<li class="active"><%= link_to @event.name, event_path(@event) %></li>
+</ol>
+<h2><%= @event.name %><sup> <small> <em> <%= @event.status %></em></small></sup></h2>
 </div>
 <h5>Event is <b><%= @event.status.upcase %></b></h5>
 <p>
@@ -10,6 +15,14 @@
 	<b>Starting from :</b> <%= @event.start_datetime.strftime("%d %B %Y - %I:%M %P ") %> <br/>
 	<b>Ending at :</b> <%= @event.end_datetime.strftime("%d %B %Y - %I:%M %P ") %> <br/>
 </p>
+
+<!--Notification button-->
+
+<%# if can? :edit, @event %>
+	<%# link_to "Notify All", events_notify_all_path %>
+<%#end%>
+
+
 
 <% if can? :create, @event_booking %>
 <div>

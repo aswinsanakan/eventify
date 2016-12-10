@@ -5,13 +5,15 @@
 
 <table class="table table-striped" >
 	<tr >
+		<th>#</th>
 		<th>Event</th>
 		<th>Organiser</th>
 		<th>Action</th>
 	</tr>
-	<% @events.each do |event| %>
+	<% @events.each_with_index do |event, i| %>
 	<tr >
-		<td><%= link_to "#{event.name}", event_path(event) %></td>
+		<td><%= i+1 %></td>
+		<td><%= image_tag(event.avatar.url, height: "100px") if event.avatar %><%= link_to "#{event.name}", event_path(event) %></td>
 		<td><%= event.user.username %></td>
 		<td >
 			<%= link_to "Show", event_path(event) %>

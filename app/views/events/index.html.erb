@@ -1,31 +1,36 @@
 
-<div class="page-header">
-	<ul>
+<div class="page-header text-center">
+	<p>
 		<% if params[:search] == nil %>
 			<h3>All Events</h3>
 		<% else %>
 			<h3>Events with "<%= params[:search] %>" : </h3>
 		<% end %>
-	</ul>
+	</p>
+</div>
+<div class="text-center">
+	<h4><% if can? :my_events, Event.new %>
+		Goto <%= link_to "My Events", events_my_events_path %> 
+		<%end%>
+		<% if can? :create, Event.new %>
+			or <%= link_to "Create Event", new_event_path, class: "btn btn-info" %>
+		<% end %>
+	</h4>
+
+	<%= form_tag(events_path, method: "get", class: "form-inline") do %>
+		<%= text_field_tag :search, params[:search], prompt: "Enter a keyword...", class: "form-control" %>
+		<%= submit_tag "Search",class: "btn btn-default" %>
+	<% end %>
 </div>
 
-<h4><% if can? :my_events, Event.new %>
-	Goto <%= link_to "My Events", events_my_events_path %> 
-	<%end%>
-	<% if can? :create, Event.new %>
-		or <%= link_to "Add a new event", new_event_path, class: "btn btn-info" %>
-	<% end %>
-</h4>
 
-
-<%= form_tag(events_path, method: "get", class: "form-inline") do %>
-	<%= text_field_tag :search, params[:search], prompt: "Enter a keyword...", class: "form-control" %>
-	<%= submit_tag "Search",class: "btn btn-default" %>
-<% end %>
-<br>
-
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs" >
 	<li role="presentation" class="active"> <a href="/events">Home</a></li>
+	
+	<% if can? :my_events, Event.new %>
+		<li role="presentation"> <a href="/events/my_events">My Events</a></li>
+	<%end%>
+
   <li role="presentation" class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
       Categories <span class="caret"></span>
@@ -38,24 +43,49 @@
   </li>
 </ul>
 
-<table class="table table-striped" >
-	<tr >
-		<th>#</th>
-		<th>Event</th>
-		<th>Organiser</th>
-		<th>Action</th>
-	</tr>
-	<% @events.each_with_index do |event, i| %>
-	<tr >
-		<td><%= i+1 %></td>
-		<td width="30%"><%= image_tag(event.avatar.url, height: "100px") if event.avatar %>  <%= link_to "#{event.name}", event_path(event) %></td>
-		<td><%= event.user.username %></td>
-		<td >
-			<%= link_to "Show", event_path(event) %>
-			<% if can? :update, event %>
-				- <%= link_to "Edit", edit_event_path(event) %> - <%= link_to "Delete", event_path(event), method: :delete, data: {confirm: "Are you sure you wanna delete #{event.name} ?"} %>
-			<% end %>		
-		</td>
-	</tr>
-	<% end %>
-</table>
+
+
+<div class="row">
+	<% @events.each do |event|%>
+	<div class="col-sm-4 col-md-3">
+		<div class="card">
+		  <%= image_tag(event.avatar.url, height: "150px", width: "100%") %>
+		  <div class="card-padding">
+		  	<div class="row">
+		  		<h4 style="margin-left:8px;"><%= link_to "#{event.name}", event_path(event) %></h4>
+		  	</div>
+	        
+	        <div class="row">
+	        	<div class="col-md-8">
+	        		<p class="text-left"><%= event.categories.pluck(:name).map { |e| e.capitalize }.join(', ') %></p>
+	        	</div>
+	        	<div class="col-md-4">
+	        		<p class="text-center">
+	        			<%= link_to event_path(event) do%>
+							<span class="glyphicon glyphicon-eye-open"></span>
+						<%end%>
+						<% if can? :update, event %>
+							<%= link_to edit_event_path(event) do %>
+								<span class="glyphicon glyphicon-pencil"></span>
+							<%end%>
+							<%= link_to event_path(event), method: :delete, data: {confirm: "Are you sure?"} do %>
+								<span class="glyphicon glyphicon-trash"></span>
+							<%end%>	
+						<% end %>
+	        		</p>
+	        	</div>
+	        </div>
+
+	        <div class="row">
+	        	<div class="col-md-6 ">
+	        		<p class="text-center well well-sm"> <small><%= event.end_datetime.strftime("%d %b %Y") %></small></p>
+	        	</div>
+	        	<div class="col-md-6" style="margin-top:2px">
+	        		<p ><a href="/events/<%= "#{event.id}" %>" class="btn btn-danger" role="button" style="border: none; color: white;">Buy Tickets</a></p>
+	        	</div>
+	        </div>
+		  </div>
+		</div>
+	</div>
+	<%end%>
+</div>

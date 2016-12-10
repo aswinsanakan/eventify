@@ -5,7 +5,7 @@
 <%= form_for @venue, html: {class: "form-horizontal"} do |f| %>
 <div class="form-group">
 	<% if @venue.errors.any? %>
-		<div class="errors" style="color : red;">
+		<div class="alert alert-danger">
 			<h3>These errors prohibited the form from being created:</h3>
 			<ul>
 				<% @venue.errors.full_messages.each do |msg| %>

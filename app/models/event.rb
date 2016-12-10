@@ -19,7 +19,7 @@ class Event < ActiveRecord::Base
 	#validates_presence_of :name
 
 	def self.search(search)
-		where("name LIKE ?", "#{search}")
+		where("name LIKE ?", "%#{search}%")
 		#where("description LIKE ?", "%#{search}%")
 	end
 
