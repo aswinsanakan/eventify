@@ -31,7 +31,7 @@ task :setup_data => :environment do
 	user4.roles.push(Role.last)
 
 	#User
-	user = User.create(email: "user@gmail.com", name: "User Guy", password: "user123")
+	user = User.create(email: "user@gmail.com", username: "User Guy", password: "user123")
 	user.roles.push(Role.last)
 
 #Populating Tables
