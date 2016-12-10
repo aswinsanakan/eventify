@@ -48,7 +48,7 @@ task :setup_data => :environment do
 	#Venues
 	venue_owners = [user3.id, user4.id]
 	5.times do
-		Venue.create(name: Faker::Lorem.word, locality_id: Locality.ids.sample, address: Faker::Address.street_address, user_id: venue_owners.sample, seats: [250,500,750,1000].sample)
+		Venue.create(user_id: venue_owners.sample, name: Faker::Lorem.word, locality_id: Locality.ids.sample, address: Faker::Address.street_address, seats: [250,500,750,1000].sample)
 	end
 
 	#Categories
@@ -62,7 +62,7 @@ task :setup_data => :environment do
 	organizers = [user1.id, user2.id]
 	10.times do 
 		startdate = Faker::Time.between(DateTime.now, DateTime.now + 7)
-		event = Event.create(category_ids: Category.ids.sample(2), name: Faker::Lorem.word, description: Faker::Lorem.paragraph, venue_id: Venue.ids.sample, start_datetime: startdate, end_datetime: Faker::Time.between(startdate + 1.day, startdate + 3.days), entry_fee: Faker::Number.between(500,1500),tickets_left: [250,500,750,1000].sample, status: statuses.sample, locality_id: Locality.ids.sample, user_id: organizers.sample )
+		event = Event.create(, user_id: organizers.sample, category_ids: Category.ids.sample(2), name: Faker::Lorem.word, description: Faker::Lorem.paragraph, venue_id: Venue.ids.sample, start_datetime: startdate, end_datetime: Faker::Time.between(startdate + 1.day, startdate + 3.days), entry_fee: Faker::Number.between(500,1500),tickets_left: [250,500,750,1000].sample, status: statuses.sample, locality_id: Locality.ids.sample )
 	
 	#VenueBooking
 		VenueBooking.create(start_datetime: event.start_datetime, end_datetime: event.end_datetime, venue_id: event.venue_id, event_id: event.id)
