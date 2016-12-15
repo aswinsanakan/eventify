@@ -3,3 +3,18 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+.jumbotron.jumbotron-login {
+    position: relative;
+    background: #fff image-url("jumbotron-bg.jpg") center center;
+    color: #fff ;
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+    overflow: hidden;
+    margin-bottom: 10px;
+    
+}
+
+.container .jumbotron {
+    border-radius: 0px;
+}

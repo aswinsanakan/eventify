@@ -8,13 +8,23 @@
 			<li><%= link_to "Venues", venues_path %></li>
 			<li class="active"><%= link_to @venue.name, venue_path(@venue) %></li>
 		</ol>
-		<h3><%= @venue.name.capitalize %></h3>
+		<h3><%= @venue.name %></h3>
 	</div>
 
 	<div class="row">
 		<div class="col-md-6">
 			
 			<%= image_tag(@venue.avatar.url, display: "block", width: "100%", margin: "auto" ) if @venue.avatar.url %>
+			<div class="row" style="margin-top:20px">
+				<div class="col-md-6" >
+					<p> <b>Owned by : </b><%= @venue.user.username %></p>
+					<p><b>Address : </b><%= @venue.address %></p>
+				</div>
+				<div class="col-md-5 well">
+					<h4>Seat Capacity : <b><%= @venue.seats %></b></h4>
+				</div>
+			</div>
+			
 		</div>
 
 		<div class="col-md-6">
@@ -23,60 +33,62 @@
 	</div>
 
 
-	<p>Owned by : <%= @venue.user.username %></p>
-	<p>Address : <%= @venue.address %></p>
-	<p>Seat Capacity : <b><%= @venue.seats %></b></p>
-	<br>
+	<div class="row">
+		
+		<div class="col-md-7">
+			<div class="page-header">
+					<h3>Bookings</h3>
+			</div>
+			<table class="table table-bordered", >
+				<tr>
+					<th>#</th>
+					<th>Event</th>
+					<th>Starts on</th>
+					<th>Ends at</th>
+				</tr>
+				<% @venue.venue_bookings.each_with_index do |booking, i| %>
+				<tr>
+					<td>
+						<%= i +=1 %>		
+					</td>
+					<td>
+						<% if !booking.event.nil? %>
+							<%= booking.event.name.capitalize %>
+						<% else %>
+							<p>*Booked by VenueOwner*</p>
+						<%end%>
+					</td>
+					<td><%= booking.start_datetime.strftime("%d %B %Y - %I:%M %P ") %></td>
+					<td><%= booking.end_datetime.strftime("%d %B %Y - %I:%M %P ") %></td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
 
+		<div class="col-md-5 ">			
+			<% if can? :update, @venue %>
+				<div class="page-header">
+					<h3>Add a Booking</h3>
+				</div>
+				<div class="well">
+				<%= form_for @venue_booking do |f| %>
+					
+					<%= f.hidden_field :venue_id, value: @venue.id %>
 
-	<% if can? :update, @venue %>
-		<h4>Add a Booking</h4>
+					<%= f.label "Starting at" %>
+				<%= f.datetime_select :start_datetime, ampm: true, minute_step: 15 %> <br>
 
-		<%= form_for @venue_booking do |f| %>
-			
-			<%= f.hidden_field :venue_id, value: @venue.id %>
+				<%= f.label "Ending at" %>
+				<%= f.datetime_select :end_datetime, ampm: true, minute_step: 15 %> <br/>
+						
+					<%= f.submit "Book", class: "btn btn-primary"%>
 
-			<%= f.label "Starting at" %>
-		<%= f.datetime_select :start_datetime, ampm: true, minute_step: 15 %> <br>
+				<% end %>
+				</div>
+			<% end %>
+		</div>
 
-		<%= f.label "Ending at" %>
-		<%= f.datetime_select :end_datetime, ampm: true, minute_step: 15 %> <br/>
-				
-			<%= f.submit "Book", class: "btn btn-primary"%>
-
-		<% end %>
-
-	<% end %>
-
-	<br>
-
-
-	<h4>Bookings</h4>
-	<table class="table table-bordered", >
-		<tr>
-			<th>#</th>
-			<th>Event</th>
-			<th>Starts on</th>
-			<th>Ends at</th>
-		</tr>
-		<% @venue.venue_bookings.each_with_index do |booking, i| %>
-		<tr>
-			<td>
-				<%= i +=1 %>		
-			</td>
-			<td>
-				<% if !booking.event.nil? %>
-					<%= booking.event.name.capitalize %>
-				<% else %>
-					<p>*Booked by VenueOwner*</p>
-				<%end%>
-			</td>
-			<td><%= booking.start_datetime.strftime("%d %B %Y - %I:%M %P ") %></td>
-			<td><%= booking.end_datetime.strftime("%d %B %Y - %I:%M %P ") %></td>
-		</tr>
-		<% end %>
-	</table>
-
+	</div>
 
 	<%= link_to "Back", venues_path %>
 

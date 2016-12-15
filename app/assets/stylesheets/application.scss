@@ -35,26 +35,15 @@
     padding: 2px 16px;
 }
 
-.jumbotron {
-    position: relative;
-    background: #fff image-url("jumbotron-bg.jpg") center center;
-    color: #fff;
-    width: 100%;
-    height: 350px;
-    background-size: cover;
-    overflow: hidden;
-    margin-bottom: 10px;
-    
-}
 
-.container .jumbotron {
-    border-radius: 0px;
-}
 
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
     border: 0;
+    color: white;
+    text-shadow: 0.25px 0.25px #07A0C3;
+
    }
 
 .navbar-brand {
@@ -67,5 +56,10 @@
 }
 
 .top-wrap {
-    height: 50px;
+    background: #477998;
+    padding-top: 50px;
 }
+
+/* blue - #086788 
+    red- DD1C1A
+*/

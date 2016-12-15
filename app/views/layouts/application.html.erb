@@ -14,12 +14,21 @@
   
   <%= csrf_meta_tags %>
 </head>
-<body >
 
+
+<% if [root_path,events_path,venues_path,events_my_events_path].include? request.fullpath%>
+  <body>
+<%elsif current_page? "/categories/#{params[:id]}"%>
+  <body>
+<%else%>
+  <div class="top-wrap"></div>
+  <body >
+<%end%>
+  
 
 <div>
   
-  <nav class="navbar navbar-default navbar-fixed-top" >
+  <nav class="navbar navbar-default navbar-fixed-top" style="background-color:rgba(0,0,0,0.5);">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -35,7 +44,7 @@
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
         <ul class="nav navbar-nav">
           <li >
             <%= link_to events_path do%>
@@ -54,7 +63,7 @@
 
           <li>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" style="margin-top: 10px">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#infoModal" style="margin-top: 10px">
               Click for Info
             </button>
           </li>
@@ -77,9 +86,7 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-  <div class="top-wrap">
-    
-  </div>
+  
 
   <% if notice %>
     <div class="alert alert-success">

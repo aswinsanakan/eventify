@@ -1,7 +1,7 @@
 	
-<div class="jumbotron" >
-  <div class="container">
-    
+<div class="jumbotron jumbotron-events" >
+  <div class="container" >
+    <div style="margin-top: 100px">
 	<div class="page-header text-center">
 		<p>
 			<% if params[:search] == nil %>
@@ -13,7 +13,7 @@
 	</div>
 	<div class="text-center">
 		<h4><% if can? :my_events, Event.new %>
-			Goto <%= link_to "My Events", events_my_events_path %> 
+			Goto <%= link_to "My Events", events_my_events_path %>  
 			<%end%>
 			<% if can? :create, Event.new %>
 				or <%= link_to "Create Event", new_event_path, class: "btn btn-info" %>
@@ -26,6 +26,7 @@
 		<% end %>
 	</div>
 
+  </div>
   </div>
 </div>
 
