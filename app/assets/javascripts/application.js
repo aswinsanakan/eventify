@@ -12,7 +12,17 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require bootstrap-sprockets
+// require turbolinks
 //= require_tree .
 
-//= require bootstrap-sprockets
+
+
+
+$(document).ready(function(){
+	$("#event_venue_id").chosen();
+
+	$("#startDatetime").datetimepicker({
+		"dateFormat": "yy-mm-dd"
+	});
+});

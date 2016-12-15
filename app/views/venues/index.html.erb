@@ -1,36 +1,84 @@
-<div class="page-header"><h3>All venues</h3></div>
-
-
-<% if can? :create, Venue.new %>
-	<%= link_to "Add a venue", new_venue_path, class: "btn btn-info" %> <br>
-<% end %>
-<br>
-
-<table class="table table-striped">
-	<tr>
-		<th>Venue</th>
-		<th>Owner</th>
-		<th>Seats</th>
-		<th>Action</th>
-	</tr>
-	<% @venues.each do |venue| %>
-	<tr>
-		<td><%= link_to "#{venue.name}", venue_path(venue) %></td>
-		<td><%= venue.user.username %></td>
-		<td><%= venue.seats %></td>
-		<td>
-			<%= link_to venue_path(venue) do%>
-				<span class="glyphicon glyphicon-eye-open"></span>
-			<%end%>
-			<% if can? :update, venue %>
-				<%= link_to edit_venue_path(venue) do %>
-					<span class="glyphicon glyphicon-pencil"></span>
-				<%end%>
-				<%= link_to venue_path(venue), method: :delete, data: {confirm: "Are you sure?"} do %>
-					<span class="glyphicon glyphicon-trash"></span>
-				<%end%>
+	
+<div class="jumbotron" >
+  <div class="container">
+    
+	<div class="page-header text-center">
+		<p>
+			<% if params[:search] == nil %>
+				<h3>All Venues</h3>
+			<% else %>
+				<h3>Venues with "<%= params[:search] %>" : </h3>
 			<% end %>
-		</td>
-	</tr>
-	<% end %>
-</table>
+		</p>
+	</div>
+	<div class="text-center">
+		<h4><% if can? :my_events, Event.new %>
+			Goto <%= link_to "My Events", events_my_events_path %> 
+			<%end%>
+			<% if can? :create, Venue.new %>
+				Or,
+				<%= link_to "Add a venue", new_venue_path, class: "btn btn-info" %> 
+			<% end %>
+		</h4>
+
+		<%= form_tag(venues_path, method: "get", class: "form-inline") do %>
+			<%= text_field_tag :search, params[:search], prompt: "Enter a keyword...", class: "form-control" %>
+			<%= submit_tag "Search",class: "btn btn-default" %>
+		<% end %>
+	</div>
+
+  </div>
+</div>
+
+
+
+
+<div class="container">
+	
+	<%= render 'tab' %>
+
+<div class="row">
+	<% @venues.each do |venue|%>
+	<div class="col-sm-6 col-md-3">
+		<div class="card">
+		  <%= image_tag(venue.avatar.url , height: "150px", width: "100%") if (venue.avatar) %>
+		  <div class="card-padding">
+		  	<div class="row">
+		  		<h4 style="margin-left:8px;"><%= link_to "#{venue.name}", venue_path(venue) %></h4>
+		  	</div>
+	        
+	        <div class="row">
+	        	<div class="col-md-8">
+	        		<p class="text-left"><%= venue.locality.city.name %></p>
+	        	</div>
+	        	<div class="col-md-4">
+	        		<p class="text-center">
+	        			<%= link_to venue_path(venue) do%>
+							<span class="glyphicon glyphicon-eye-open"></span>
+						<%end%>
+						<% if can? :update, venue %>
+							<%= link_to edit_venue_path(venue) do %>
+								<span class="glyphicon glyphicon-pencil"></span>
+							<%end%>
+							<%= link_to venue_path(venue), method: :delete, data: {confirm: "Are you sure?"} do %>
+								<span class="glyphicon glyphicon-trash"></span>
+							<%end%>	
+						<% end %>
+	        		</p>
+	        	</div>
+	        </div>
+
+	        <div class="row">
+	        	<div class="col-md-6 ">
+	        		<p class="text-center well well-sm"> <small><%= venue.seats %></small></p>
+	        	</div>
+	        	<div class="col-md-6" style="margin-top:2px">
+	        		<p ><a href="/venues/<%= "#{venue.id}" %>" class="btn btn-danger" role="button" style="border: none; color: white;">Book Venue</a></p>
+	        	</div>
+	        </div>
+		  </div>
+		</div>
+	</div>
+	<%end%>
+</div>
+</div>

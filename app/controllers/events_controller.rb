@@ -62,6 +62,7 @@ class EventsController < ApplicationController
 
 	def my_events
 		@events = current_user.events
+		@categories = Category.all
 	end
 
 	private

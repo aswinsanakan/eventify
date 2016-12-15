@@ -4,6 +4,12 @@ class VenuesController < ApplicationController
 	
 	def index
 		@venues = Venue.all 
+		@categories = Category.all
+		if params[:search]
+			@venues = Venue.search(params[:search])
+		else
+			@venues = Venue.all 
+		end
 	end
 
 	def new
@@ -47,6 +53,6 @@ class VenuesController < ApplicationController
 	private
 
 	def venue_params
-		params[:venue].permit(:name, :locality_id, :address, :user_id, :seats)
+		params[:venue].permit(:name, :locality_id, :address, :user_id, :seats, :avatar)
 	end
 end

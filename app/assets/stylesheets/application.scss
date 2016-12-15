@@ -11,7 +11,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- 
+ *= require_tree .
+ *= require_self
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -32,4 +33,25 @@
 /* Add some padding inside the card container */
 .card-padding {
     padding: 2px 16px;
+}
+
+
+
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    border: 0;
+   }
+
+.navbar-brand {
+	padding: 0;
+}
+
+.navbar-brand > img {
+    
+    width: 150px;
+}
+
+.top-wrap {
+    height: 50px;
 }

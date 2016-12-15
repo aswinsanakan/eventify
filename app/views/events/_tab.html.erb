@@ -1,0 +1,18 @@
+<ul class="nav nav-tabs" >
+	<li role="presentation" class="active"> <a href="/events">Home</a></li>
+	
+	<% if can? :my_events, Event.new %>
+		<li role="presentation"> <a href="/events/my_events">My Events</a></li>
+	<%end%>
+
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      Categories <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <% @categories.each do |category| %>
+      	<li><%= link_to category.name.capitalize, category_path(category) %></li>
+      <% end %>
+    </ul>
+  </li>
+</ul>

@@ -2,96 +2,117 @@
 <html>
 <head>
   <title>Eventify</title>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "https://www.google.com/jsapi" %>
+
+  <link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css"/ >
+  <script src="/jquery.js"></script>
+  <script src="/build/jquery.datetimepicker.full.min.js"></script>
+
+  
   <%= csrf_meta_tags %>
 </head>
-<body style="padding-bottom:80px">
+<body >
 
 
+<div>
+  
+  <nav class="navbar navbar-default navbar-fixed-top" >
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+          <%= image_tag('eventify_logo2.png', width: "95px", class: "img-responsive")  %>
+        </a>
+      </div>
 
-<nav class="navbar navbar-default" >
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">
-        <%= image_tag('eventify_logo.png', width: "95px", class: "img-responsive")  %>
-      </a>
-    </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li >
+            <%= link_to events_path do%>
+              Events <span class="badge"><%= Event.all.size %></span>
+            <%end%>
+          </li>
+          <li>
+            <%= link_to venues_path do %>
+              Venues <span class="badge"><%= Venue.all.size %></span>
+            <%end%>  
+          </li>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li >
-          <%= link_to events_path do%>
-            Events <span class="badge"><%= Event.all.size %></span>
-          <%end%>
-        </li>
-        <li>
-          <%= link_to venues_path do %>
-            Venues <span class="badge"><%= Venue.all.size %></span>
-          <%end%>  
-        </li>
-
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
-			 <li > <a > <%= current_user.username %> </a> </li> 
-       <li>
-			<%= link_to "Account Setting", edit_user_registration_path %> </li>
-			<li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-		<% else %>
-			<li><%= link_to "Login", new_user_session_path %></li>
-			<li><%= link_to "Register", new_user_registration_path %></li>
-		<% end %>
+        </ul>
         
-      </ul>
+        <ul class="nav navbar-nav navbar-right">
 
-    </div><!-- /.navbar-collapse -->
+          <li>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" style="margin-top: 10px">
+              Click for Info
+            </button>
+          </li>
+
+          <% if user_signed_in? %>
+         <li > <a > <%= current_user.username %> </a> </li> 
+         <li>
+        <%= link_to "Account Setting", edit_user_registration_path %> </li>
+        <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to "Login", new_user_session_path %></li>
+        <li><%= link_to "Register", new_user_registration_path %></li>
+      <% end %>
+          
+        </ul>
+
+      </div><!-- /.navbar-collapse -->
 
 
-  </div><!-- /.container-fluid -->
-</nav>
+    </div><!-- /.container-fluid -->
+  </nav>
 
-<% if notice %>
-  <div class="alert alert-success">
-    <%= notice %>
+  <div class="top-wrap">
+    
   </div>
-<%end%>
 
-<% if alert %>
-  <div class="alert alert-danger">
-    <%= alert %>
-  </div>
-<%end%>
-	
+  <% if notice %>
+    <div class="alert alert-success">
+      <%= notice %>
+    </div>
+  <%end%>
 
+  <% if alert %>
+    <div class="alert alert-danger">
+      <%= alert %>
+    </div>
+  <%end%>
 
-<div class="container">
-  <%= yield %>
+    <%= yield %>
 </div>
 
-<!-- footer starts here --> 
-<div class="navbar navbar-default navbar-fixed-bottom"  >
-    <div class="container-fluid">
-      <div class="pull-left" >
-        <p>Copyright @ 2016</p>
-      </div>
-
-      <div class="pull-right">
-        <p >Powered by <a href="https://www.getbootstrap.com"> Bootstrap</a></p>
-      </div>
-    </div>
-</div><!-- footer ends here --> 
 
 
+
+	
+
+<hr>
+<div class="container">
+  <div class="col-md-6 text-left">
+    <p>Copyright © 2016 Eventify.com. All rights reserved.</p>
+  </div>
+  <div class="col-md-6 text-right">
+    <p >Powered by <a href="https://www.getbootstrap.com" target="_blank">Bootstrap</a> @ <a href="https://www.dctacademy.com" target="_blank">DCT Academy</a></p>
+  </div>
+</div>
+
+
+<%= render 'layouts/info' %>
 
 </body>
 </html>

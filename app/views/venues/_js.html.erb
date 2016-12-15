@@ -1,0 +1,26 @@
+<% if !@venue.new_record? %>
+	
+	<script>
+		$(document).ready(function() {
+			$('#calendar').fullCalendar({
+				defaultDate: '<%= Date.today.strftime("%Y-%m-%d") %>',
+				eventLimit: true, // allow "more" link when too many events
+				events: [
+					<% @venue.venue_bookings.each do |booking| %>
+					{
+						<% if !booking.event.nil? %>
+							title: "<%= booking.event.name.capitalize %>",
+						<% else %>
+							title: "*Booked by VenueOwner*",
+						<%end%>
+						
+						start: "<%= booking.start_datetime.strftime("%Y-%m-%d") %>",
+						end: "<%= booking.end_datetime.strftime("%Y-%m-%d") %>"
+					},
+					<% end %>
+				]
+			});
+		});
+	</script>
+
+<%end%>
