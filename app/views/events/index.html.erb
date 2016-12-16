@@ -57,7 +57,7 @@
 	<% @events.each do |event|%>
 	<div class="col-sm-6 col-md-3">
 		<div class="card">
-		  <%= image_tag(event.avatar.url, height: "150px", width: "100%") %>
+		  <%= link_to image_tag(event.avatar.url, height: "150px", width: "100%"), event_path(event) %>
 		  <div class="card-padding">
 		  	<div class="row">
 		  		<h4 style="margin-left:8px;"><%= link_to "#{event.name}", event_path(event) %></h4>

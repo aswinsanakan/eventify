@@ -58,13 +58,33 @@
           </li>
 
         </ul>
+
+        <% if notice %>
+        <ul class="nav navbar-nav ">
+          <li >
+              
+              <b><%= notice %></b>  
+              
+            </li>
+        </ul>
+        <%end%>
+
+        <% if alert %>
+        <ul class="nav navbar-nav ">
+          <li>
+               <b><%= alert %></b> 
+              
+          </li>
+        </ul>
+        <%end%>
+
         
         <ul class="nav navbar-nav navbar-right">
 
           <li>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#infoModal" style="margin-top: 10px">
-              Click for Info
+              About
             </button>
           </li>
 
@@ -87,18 +107,6 @@
   </nav>
 
   
-
-  <% if notice %>
-    <div class="alert alert-success">
-      <%= notice %>
-    </div>
-  <%end%>
-
-  <% if alert %>
-    <div class="alert alert-danger">
-      <%= alert %>
-    </div>
-  <%end%>
 
     <%= yield %>
 </div>
