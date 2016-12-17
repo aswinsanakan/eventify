@@ -35,7 +35,7 @@ task :setup_data => :environment do
 	user.roles.push(Role.last)
 
 
-=begin
+
 #Populating Tables
 	#City
 	cities = ["Bangalore", "Kochi", "Delhi", "Kolkatta", "Chennai", "Mumbai", "Hyderabad"]
@@ -73,6 +73,5 @@ task :setup_data => :environment do
 
 	#EventBooking
 
-=end
 
 end
