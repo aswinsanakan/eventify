@@ -1,0 +1,21 @@
+
+development:
+  cloud_name: "aswinsan"
+  api_key: "327875526398462"
+  api_secret: "3NP8bse-iJXE5NKQXoYhzZPmkM4"
+  enhance_image_tag: true
+  static_image_support: false
+
+production:
+  cloud_name: "aswinsan"
+  api_key: "327875526398462"
+  api_secret: "3NP8bse-iJXE5NKQXoYhzZPmkM4"
+  enhance_image_tag: true
+  static_image_support: true
+
+test:
+  cloud_name: "aswinsan"
+  api_key: "327875526398462"
+  api_secret: "3NP8bse-iJXE5NKQXoYhzZPmkM4"
+  enhance_image_tag: true
+  static_image_support: false
