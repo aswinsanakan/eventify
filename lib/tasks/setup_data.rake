@@ -34,6 +34,8 @@ task :setup_data => :environment do
 	user = User.create(email: "user@gmail.com", username: "User Guy", password: "user123")
 	user.roles.push(Role.last)
 
+
+=begin
 #Populating Tables
 	#City
 	cities = ["Bangalore", "Kochi", "Delhi", "Kolkatta", "Chennai", "Mumbai", "Hyderabad"]
@@ -70,5 +72,7 @@ task :setup_data => :environment do
 	end
 
 	#EventBooking
+
+=end
 
 end

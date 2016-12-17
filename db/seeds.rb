@@ -1,3 +1,4 @@
+=begin
 User.create!([
   {email: "admin@gmail.com", encrypted_password: "$2a$11$qsz.Rem24Bi3gbRU6bmgkeOO2MrBR7IIULrUbgfeWSIHduoyWx1lG", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 23, current_sign_in_at: "2016-12-17 07:43:28", last_sign_in_at: "2016-12-16 18:41:59", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "Admin Aswin"},
   {email: "organizer@gmail.com", encrypted_password: "$2a$11$2TMoMjEop.o62c7bTms3oOz5hM64x1kC2mcfRuMPd192Bp/7UJEqy", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2016-12-04 15:25:34", last_sign_in_at: "2016-11-29 11:34:58", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "Organizer Rahul"},
@@ -8,6 +9,7 @@ User.create!([
   {email: "user2@gmail.com", encrypted_password: "$2a$11$v8.L3SmW9uVNFtNOCNpb6OqYUsiOBO6USb9VsGnBy/C.DT0XUjfMy", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2016-11-28 20:58:12", last_sign_in_at: "2016-11-28 20:46:10", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "User Priya"},
   {email: "user3@gmail.com", encrypted_password: "$2a$11$DlxeD8.na5dfSCENHrJd.O5lnO0t8tyzA3S5qnE7aTTKx2KTxB8fS", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2016-12-01 13:24:06", last_sign_in_at: "2016-12-01 13:24:06", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "User Peter"}
 ])
+=end
 Category.create!([
   {name: "tech"},
   {name: "music"},
