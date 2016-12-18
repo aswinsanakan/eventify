@@ -4,8 +4,8 @@ class Ability
   def initialize(user)
 
     if user.nil?
-        can :read, Event
-        can :read, Venue
+        #can :read, Event
+        #can :read, Venue
         
     elsif user.role? "admin"
         can :manage, :all 

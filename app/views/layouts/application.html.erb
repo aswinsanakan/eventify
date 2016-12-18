@@ -16,7 +16,7 @@
 </head>
 
 
-<% if [root_path,events_path,venues_path,events_my_events_path].include? request.fullpath%>
+<% if [events_path,venues_path,events_my_events_path].include? request.fullpath%>
   <body>
 <%elsif current_page? "/categories/#{params[:id]}"%>
   <body>
@@ -59,20 +59,20 @@
 
         </ul>
 
-        <% if notice %>
-        <ul class="nav navbar-nav ">
-          <li >
+        <% if notice %> 
+        <ul class="nav navbar-nav " style="margin-top:15px">
+          <li>
               
-              <b><%= notice %></b>  
+              <b style="color:#03CEA4"><%= notice %></b>  
               
             </li>
         </ul>
         <%end%>
 
-        <% if alert %>
-        <ul class="nav navbar-nav ">
+        <% if alert %> 
+        <ul class="nav navbar-nav " style="margin-top:15px">
           <li>
-               <b><%= alert %></b> 
+               <b style="color:#FB4D3D"><%= alert %></b> 
               
           </li>
         </ul>

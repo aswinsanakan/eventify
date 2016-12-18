@@ -22,8 +22,10 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  #root 'new_user_session_path'
-  root 'events#index'
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
+  #root 'events#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

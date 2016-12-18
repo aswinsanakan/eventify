@@ -42,7 +42,8 @@
     border-radius: 0;
     border: 0;
     color: white;
-    text-shadow: 0.25px 0.25px #07A0C3;
+    font-weight: bold;
+    /*text-shadow: 0.25px 0.25px #07A0C3;*/
 
    }
 
@@ -53,6 +54,10 @@
 .navbar-brand > img {
     
     width: 150px;
+}
+
+ul.nav a:hover { 
+    color: #fff !important; 
 }
 
 .top-wrap {
