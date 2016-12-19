@@ -8,30 +8,30 @@ task :setup_data => :environment do
 
 #User Creation & Assigning roles
 	#Admin
-	user = User.create(email: "admin@gmail.com", username: "Admin", password: "admin123")
+	user = User.create(email: "admin@gmail.com", username: "Admin Aswin", password: "admin123")
 	user.roles.push(Role.first)
 	user.roles.push(Role.last)
 
 	#Organizers
-	user1 = User.create(email: "organizer@gmail.com", username: "Organizer", password: "organ123")
+	user1 = User.create(email: "organizer@gmail.com", username: "Organizer Rahul", password: "organ123")
 	user1.roles.push(Role.second)
 	user1.roles.push(Role.last)
 
-	user2 = User.create(email: "organizer1@gmail.com", username: "Organizer#1", password: "organ123")
+	user2 = User.create(email: "organizer1@gmail.com", username: "Organizer Arjun", password: "organ123")
 	user2.roles.push(Role.second)
 	user2.roles.push(Role.last)
 
 	#Venue Owners
-	user3 = User.create(email: "venueowner@gmail.com", username: "Venue Owner", password: "venue123")
+	user3 = User.create(email: "venueowner@gmail.com", username: "Venue Owner Daniel", password: "venue123")
 	user3.roles.push(Role.third)
 	user3.roles.push(Role.last)
 
-	user4 = User.create(email: "venueowner1@gmail.com", username: "Venue Owner #1", password: "venue123")
+	user4 = User.create(email: "venueowner1@gmail.com", username: "Venue Owner Bonny", password: "venue123")
 	user4.roles.push(Role.third)
 	user4.roles.push(Role.last)
 
 	#User
-	user = User.create(email: "user@gmail.com", username: "User Guy", password: "user123")
+	user = User.create(email: "user@gmail.com", username: "User Jeff", password: "user123")
 	user.roles.push(Role.last)
 
 
