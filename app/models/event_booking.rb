@@ -26,4 +26,5 @@ class EventBooking < ActiveRecord::Base
 			errors.add(:event, "Only few tickets left. Choose a lesser number of tickets.")
 		end
 	end
+
 end
