@@ -25,4 +25,9 @@ $(document).ready(function(){
 	$("#startDatetime").datetimepicker({
 		"dateFormat": "yy-mm-dd"
 	});
+
+	$("#endDatetime").datetimepicker({
+		"dateFormat": "yy-mm-dd"
+	});
+
 });

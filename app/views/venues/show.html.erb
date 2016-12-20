@@ -76,10 +76,12 @@
 					<%= f.hidden_field :venue_id, value: @venue.id %>
 
 					<%= f.label "Starting at" %>
-				<%= f.datetime_select :start_datetime, ampm: true, minute_step: 15 %> <br>
+				<%= f.text_field :start_datetime, id: "startDatetime" %> <br>
 
 				<%= f.label "Ending at" %>
-				<%= f.datetime_select :end_datetime, ampm: true, minute_step: 15 %> <br/>
+				<%= f.text_field :end_datetime, id: "endDatetime" %> <br/>
+
+				<!-- f.datetime_select :end_datetime, ampm: true, minute_step: 15  -->
 						
 					<%= f.submit "Book", class: "btn btn-primary"%>
 
