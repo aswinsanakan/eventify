@@ -1,7 +1,9 @@
 ## Eventify
 #### [Github](https://github.com/aswinsanakan/eventify) | [Demo](https://eventifyweb.herokuapp.com/)
-An event management web application made in Rails 4 from scratch.
-Focused on : Event Organiser, Venue Owner and Normal Users
+An event management web application made in Rails 4 from scratch. <br>
+Roles : Event Organiser, Venue Owner and Normal Users.
+
+![Eventify Screenshot](screenshot.png)
 
 #### Dependencies used:
 - devise gem : For User Authentication 
