@@ -39,43 +39,43 @@
 
 <div class="row">
 	<% @venues.each do |venue|%>
-	<div class="col-sm-6 col-md-3">
+	<div class="col-12 col-sm-6 col-md-4 col-lg-3">
 		<div class="card">
 		  <%= link_to image_tag(venue.avatar.url , height: "150px", width: "100%"), venue_path(venue) %>
 		  <div class="card-padding">
 		  	<div class="row">
-		  		<h4 style="margin-left:8px;"><%= link_to "#{venue.name}", venue_path(venue) %></h4>
+		  		<h4 class="text-center"><%= link_to "#{venue.name}", venue_path(venue) %></h4>
 		  	</div>
 	        
-	        <div class="row">
-	        	<div class="col-md-8">
-	        		<p class="text-left"><%= venue.locality.city.name %></p>
-	        	</div>
-	        	<div class="col-md-4">
-	        		<p class="text-center">
-	        			<%= link_to venue_path(venue) do%>
-							<span class="glyphicon glyphicon-eye-open"></span>
+        <div class="row">
+        	<div class="col-md-8">
+        		<p class="text-center"><%= venue.locality.city.name %></p>
+        	</div>
+        	<div class="col-md-4">
+        		<p class="text-center">
+        			<%= link_to venue_path(venue) do%>
+						<span class="glyphicon glyphicon-eye-open"></span>
+					<%end%>
+					<% if can? :update, venue %>
+						<%= link_to edit_venue_path(venue) do %>
+							<span class="glyphicon glyphicon-pencil"></span>
 						<%end%>
-						<% if can? :update, venue %>
-							<%= link_to edit_venue_path(venue) do %>
-								<span class="glyphicon glyphicon-pencil"></span>
-							<%end%>
-							<%= link_to venue_path(venue), method: :delete, data: {confirm: "Are you sure?"} do %>
-								<span class="glyphicon glyphicon-trash"></span>
-							<%end%>	
-						<% end %>
-	        		</p>
-	        	</div>
-	        </div>
+						<%= link_to venue_path(venue), method: :delete, data: {confirm: "Are you sure?"} do %>
+							<span class="glyphicon glyphicon-trash"></span>
+						<%end%>	
+					<% end %>
+        		</p>
+        	</div>
+        </div>
 
-	        <div class="row">
-	        	<div class="col-md-6 ">
-	        		<p class="text-center well well-sm"> <small><%= venue.seats %> seats</small></p>
-	        	</div>
-	        	<div class="col-md-6" style="margin-top:2px">
-	        		<p ><a href="/venues/<%= "#{venue.id}" %>" class="btn btn-danger" role="button" style="border: none; color: white;">Book Venue</a></p>
-	        	</div>
-	        </div>
+        <div class="row">
+        	<div class="col-sm-6 col-md-6 ">
+        		<p class="text-center well well-sm"> <small><%= venue.seats %> seats</small></p>
+        	</div>
+        	<div class="col-sm-6 col-md-6" style="margin-top:2px">
+        		<p class="text-center"><a href="/venues/<%= "#{venue.id}" %>" class="btn btn-danger" role="button" style="border: none; color: white;">Book Venue</a></p>
+        	</div>
+        </div>
 		  </div>
 		</div>
 	</div>

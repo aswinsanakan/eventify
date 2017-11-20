@@ -5,6 +5,14 @@ Roles : Event Organiser, Venue Owner and Normal Users.
 
 ![Eventify Screenshot](screenshot.png)
 
+#### Setup:
+* Clone the repo
+* Run bundle install
+* Run `rake db:setup:all`
+* To generate some dummy data : Run `rake setup_data`
+    Optionally, clear the data with `rake clear_data`
+
+
 #### Dependencies used:
 - devise gem : For User Authentication 
 - cancancan gem : For Role Management 

@@ -38,43 +38,48 @@
 
 <div class="row">
 	<% @events.each do |event|%>
-	<div class="col-sm-6 col-md-3">
+	<div class="col-12 col-sm-6 col-md-4 col-lg-3">
 		<div class="card">
 		  <%= link_to image_tag(event.avatar.url, height: "150px", width: "100%"), event_path(event) %>
 		  <div class="card-padding">
-		  	<div class="row">
-		  		<h4 style="margin-left:8px;"><%= link_to "#{event.name}", event_path(event) %></h4>
-		  	</div>
-	        
-	        <div class="row">
-	        	<div class="col-md-8">
-	        		<p class="text-left"><%= event.categories.pluck(:name).map { |e| e.capitalize }.join(', ') %></p>
-	        	</div>
-	        	<div class="col-md-4">
-	        		<p class="text-center">
-	        			<%= link_to event_path(event) do%>
-							<span class="glyphicon glyphicon-eye-open"></span>
-						<%end%>
-						<% if can? :update, event %>
-							<%= link_to edit_event_path(event) do %>
-								<span class="glyphicon glyphicon-pencil"></span>
-							<%end%>
-							<%= link_to event_path(event), method: :delete, data: {confirm: "Are you sure?"} do %>
-								<span class="glyphicon glyphicon-trash"></span>
-							<%end%>	
-						<% end %>
-	        		</p>
-	        	</div>
-	        </div>
 
-	        <div class="row">
-	        	<div class="col-md-6 ">
-	        		<p class="text-center well well-sm"> <small><%= event.end_datetime.strftime("%d %b %Y") %></small></p>
-	        	</div>
-	        	<div class="col-md-6" style="margin-top:2px">
-	        		<p ><a href="/events/<%= "#{event.id}" %>" class="btn btn-danger" role="button" style="border: none; color: white;">Buy Tickets</a></p>
-	        	</div>
-	        </div>
+        <!-- Event Header -->
+		  	<div class="row">
+		  		<h4 class="text-center"><%= link_to "#{event.name}", event_path(event) %></h4>
+		  	</div>
+	      
+        <!-- Event Control Panel -->
+        <div class="row">
+        	<div class="col-md-8"> 
+        		<p class="text-left"><%= event.categories.pluck(:name).map { |e| e.capitalize }.join(', ') %></p>
+        	</div>
+        	<div class="col-md-4">
+        		<p class="text-center">
+        			<%= link_to event_path(event) do%>
+    						<span class="glyphicon glyphicon-eye-open"></span>
+    					<%end%>
+    					<% if can? :update, event %>
+    						<%= link_to edit_event_path(event) do %>
+    							<span class="glyphicon glyphicon-pencil"></span>
+    						<%end%>
+    						<%= link_to event_path(event), method: :delete, data: {confirm: "Are you sure?"} do %>
+    							<span class="glyphicon glyphicon-trash"></span>
+    						<%end%>	
+    					<% end %>
+        		</p>
+        	</div>
+        </div>
+        
+        <!-- Event Date & Buy -->
+        <div class="row">
+        	<div class="col-sm-6 col-md-6 ">
+        		<p class="text-center well well-sm"> <small><%= event.end_datetime.strftime("%d %b %Y") %></small></p>
+        	</div>
+        	<div class="col-sm-6 col-md-6" style="margin-top:2px">
+        		<p class="text-center"><a href="/events/<%= "#{event.id}" %>" class="btn btn-danger" role="button" style="border: none; color: white;">Buy Tickets</a></p>
+        	</div>
+        </div>
+
 		  </div>
 		</div>
 	</div>
